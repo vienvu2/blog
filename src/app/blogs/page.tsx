@@ -1,4 +1,4 @@
-import Header from "../container/header";
+import Header from "../../container/header";
 
 export default function Home() {
   return (

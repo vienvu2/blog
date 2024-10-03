@@ -1,6 +1,6 @@
 import Header from "@/container/header";
 import { db } from "@/firebase";
-import { collection, doc, getDoc, query } from "firebase/firestore";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 export default async function Home() {
   const data = await getData();

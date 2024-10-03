@@ -62,3 +62,42 @@ body {
   color: var(--foreground);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.about {
+  max-width: 1440px;
+  margin: 0 auto;
+  // padding: 1rem;
+  padding: 40px 0 60px 0;
+}
+.service {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 40px 0 60px 0;
+  &__item {
+    flex: 1;
+  }
+}
+
+.intro {
+  max-width: 1440px;
+  padding: 40px 0 60px 0;
+  margin: 0 auto;
+  &__title {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+
+  gap: 1rem;
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+  &__item {
+    flex: 1;
+  }
+}

@@ -10,7 +10,6 @@ export default function Home() {
     <div className="main">
       <Header />
       <About />
-
       <Intro />
       <Service />
       {/* <Links /> */}

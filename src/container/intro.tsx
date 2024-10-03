@@ -1,9 +1,27 @@
+import Link from "next/link";
+
 export default function Intro() {
   return (
     <div className="intro">
-      <div className="intro__item">50+ Projects</div>
-      <div className="intro__item">5+ Years Experience</div>
-      <div className="intro__item">100+ Blogs</div>
+      <div className="intro__title">I'm a Full Stack Developer</div>
+      <div className="intro__row">
+        <div className="intro__item">
+          <h4> 50+ </h4>
+          <p> Projects</p>
+
+          <Link href="/projects">Check it out</Link>
+        </div>
+        <div className="intro__item">
+          <h4>10+</h4>
+          <p>Years Experience</p>
+          <Link href="/projects">View history</Link>
+        </div>
+        <div className="intro__item">
+          <h4>100+ </h4>
+          <p>Blogs</p>
+          <Link href="/projects">Read them</Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -40,7 +40,8 @@ export default function CreateProject() {
     slug: "",
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
     try {
       await setDoc(doc(db, "projects", data.slug), {
         title: data.title,

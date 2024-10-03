@@ -1,7 +1,7 @@
-export default function Header() {
+export default function Project() {
   return (
-    <div className="header">
-      <h1>ViênVũ</h1>
+    <div className="project">
+      <h1>Project</h1>
 
       <div className="menu">
         <a href="/">Me</a>

@@ -3,6 +3,7 @@ import Header from "@/container/header";
 import About from "@/container/about";
 import Intro from "@/container/intro";
 import Links from "@/container/link";
+import Service from "@/container/service";
 
 export default function Home() {
   return (
@@ -11,9 +12,10 @@ export default function Home() {
       <About />
 
       <Intro />
-      <Links />
+      <Service />
+      {/* <Links /> */}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

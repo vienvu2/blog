@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.scss";
-import Header from "@/container/header";
 
 export const metadata: Metadata = {
   title: "ViênVũ's Portfolio",

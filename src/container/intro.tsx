@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Intro() {
   return (
     <div className="intro">
-      <div className="intro__title">I'm a Full Stack Developer</div>
+      <div className="intro__title">I{"'"}m a Full Stack Developer</div>
       <div className="intro__row">
         <div className="intro__item">
           <h4> 50+ </h4>

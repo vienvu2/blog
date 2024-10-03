@@ -1,5 +1,6 @@
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Link from "next/link";
 
 export default async function ProjectList() {
   const projectsData = await getData();
@@ -8,7 +9,9 @@ export default async function ProjectList() {
     <div className="project-list">
       <h1>Project List</h1>
       {projectsData.map((a) => (
-        <div key={a.title}>{a.title}</div>
+        <div key={a.title}>
+          <Link href={"/projects/" + a.slug}>{a.title}</Link>
+        </div>
       ))}
     </div>
   );

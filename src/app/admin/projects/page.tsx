@@ -1,7 +1,13 @@
 "use client";
 import UploadImage from "@/container/upload";
 import { db } from "@/firebase";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -17,7 +23,11 @@ export default function CreateProject() {
 
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "projects"));
-    const projectsData = querySnapshot.docs.map((doc) => doc.data());
+    const projectsData = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    console.log({ projectsData });
     setList(projectsData as IProject[]);
   };
   useEffect(() => {
@@ -35,12 +45,21 @@ export default function CreateProject() {
       await setDoc(doc(db, "projects", data.slug), {
         title: data.title,
         description: data.description,
+        slug: data.slug,
       });
       setData({
         title: "",
         description: "",
         slug: "",
       });
+      getData();
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
+  const remove = async (e: IProject) => {
+    try {
+      await deleteDoc(doc(db, "projects", e.id));
       getData();
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -61,7 +80,9 @@ export default function CreateProject() {
               <td>
                 <Link href="/">{project.title}</Link>
               </td>
-              <th></th>
+              <th>
+                <button onClick={() => remove(project)}>Delete</button>
+              </th>
             </tr>
           ))}
         </tbody>
@@ -95,9 +116,9 @@ export default function CreateProject() {
           value={data.description}
           onChange={(e) => setData({ ...data, description: e.target.value })}
         />
-        <UploadImage />
         <button type="submit">Submit</button>
       </form>
+      <UploadImage />
     </div>
   );
 }

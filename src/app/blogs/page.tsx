@@ -1,5 +1,4 @@
 import BlogList from "@/container/blog-list";
-import Header from "../../container/header";
 // const meta = {
 //   title: "Blog",
 //   description: "Blog",
@@ -8,7 +7,6 @@ import Header from "../../container/header";
 export default function Home() {
   return (
     <div className="main">
-      <Header />
       <BlogList />
     </div>
   );

@@ -1,7 +1,11 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <div className="header">
-      <h1>ViênVũ</h1>
+      <Link href="/">
+        <h1>ViênVũ</h1>
+      </Link>
 
       <div className="menu">
         <a href="/">Me</a>

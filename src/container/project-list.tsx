@@ -4,13 +4,18 @@ import Link from "next/link";
 
 export default async function ProjectList() {
   const projectsData = await getData();
-  console.log(projectsData);
   return (
     <div className="project-list">
-      <h1>Project List</h1>
       {projectsData.map((a) => (
         <div key={a.title}>
           <Link href={"/projects/" + a.slug}>{a.title}</Link>
+          <Link href={"/projects/" + a.slug}>
+            <img src={a.image} alt={a.title} />
+            <img src={a.image} alt={a.title} />
+            <img src={a.image} alt={a.title} />
+            <img src={a.image} alt={a.title} />
+            <img src={a.image} alt={a.title} />
+          </Link>
         </div>
       ))}
     </div>

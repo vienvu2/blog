@@ -1,21 +1,31 @@
 import Header from "@/container/header";
+import { db } from "@/firebase";
+import { collection, doc, getDoc, query } from "firebase/firestore";
 
-export default function Home() {
+export default async function Home() {
+  const data = await getData();
   return (
     <div className="main">
       <Header pathname="/projects" />
-      <div className="page project-detail">
-        <ProjectDetail />
+      <div className="project-detail">
+        <ProjectDetail data={data} />
       </div>
     </div>
   );
 }
 
-const ProjectDetail = () => {
+const ProjectDetail = ({ data }: { data: any }) => {
   return (
     <div>
-      <h1>Project Detail</h1>
+      <h1>{data.title}</h1>
       <p>Project detail content</p>
     </div>
   );
+};
+
+const getData = async () => {
+  const ref = collection(db, "projects");
+  const docRef = doc(ref, "calo");
+  const res = await getDoc(docRef);
+  return res.data();
 };

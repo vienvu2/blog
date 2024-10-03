@@ -9,6 +9,7 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -180,7 +181,11 @@ table {
   }
 }
 
-form {
+.form {
+  width: 960px;
+  margin: 0 auto;
+  border: 1px solid white;
+  padding: 12px;
   input,
   button {
     padding: 0.5rem;
@@ -199,5 +204,20 @@ form {
   button {
     background: var(--background);
     color: var(--foreground);
+  }
+}
+
+button {
+  cursor: pointer;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 5px;
+  background: #223442;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  &:hover {
+    background: #1a2733;
   }
 }

@@ -1,14 +1,9 @@
-export default function Header() {
+export default function Intro() {
   return (
-    <div className="header">
-      <h1>ViênVũ</h1>
-
-      <div className="menu">
-        <a href="/">Me</a>
-        <a href="/projects">Projects</a>
-        <a href="/blogs">Blogs</a>
-        <a href="/contact">Contact</a>
-      </div>
+    <div className="intro">
+      <div className="intro__item">50+ Projects</div>
+      <div className="intro__item">5+ Years Experience</div>
+      <div className="intro__item">100+ Blogs</div>
     </div>
   );
 }

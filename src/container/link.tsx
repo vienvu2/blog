@@ -1,4 +1,4 @@
-export default function About() {
+export default function Links() {
   return (
     <div className="about">
       <div className="about__content">

@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Footer() {
   return (
     <div className="header">
       <h1>ViênVũ</h1>

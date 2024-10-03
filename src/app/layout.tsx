@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ViênVũ's Portfolio",
-  description: "ViênVũ's Portfolio website and blog",
+  title: "ViênVũ\'s Portfolio",
+  description: "ViênVũ\'s Portfolio website and blog",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>ViênVũ's Portfolio</title>
+        <title>ViênVũ{"'"}s Portfolio</title>
         <meta
           name="description"
           content="ViênVũ's Portfolio website and blog"

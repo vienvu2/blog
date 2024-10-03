@@ -1,13 +1,13 @@
 import BlogList from "@/container/blog-list";
-// const meta = {
-//   title: "Blog",
-//   description: "Blog",
-// };
+import Header from "@/container/header";
 
 export default function Home() {
   return (
     <div className="main">
-      <BlogList />
+      <Header pathname="/blogs" />
+      <div className="page">
+        <BlogList />
+      </div>
     </div>
   );
 }

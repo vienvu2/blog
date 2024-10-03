@@ -5,15 +5,19 @@ import Intro from "@/container/intro";
 import Service from "@/container/service";
 import Project from "@/container/project";
 import Customer from "@/container/customer";
+import Header from "@/container/header";
 
 export default function Home() {
   return (
     <div className="main">
-      <About />
-      <Intro />
-      <Service />
-      <Project />
-      <Customer />
+      <Header pathname="/" />
+      <div className="page">
+        <About />
+        <Intro />
+        <Service />
+        <Project />
+        <Customer />
+      </div>
     </div>
   );
 }

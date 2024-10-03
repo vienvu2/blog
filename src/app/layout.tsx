@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.scss";
+import Header from "@/container/header";
 
 export const metadata: Metadata = {
   title: "ViênVũ's Portfolio",
@@ -23,7 +24,10 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

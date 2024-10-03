@@ -10,14 +10,10 @@ import Customer from "@/container/customer";
 export default function Home() {
   return (
     <div className="main">
-      <Header />
       <About />
       <Intro />
       <Service />
-
-
       <Project />
-
       <Customer />
     </div>
   );

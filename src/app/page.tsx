@@ -11,13 +11,11 @@ export default function Home() {
   return (
     <div className="main">
       <Header pathname="/" />
-      <div className="page">
-        <About />
-        <Intro />
-        <Service />
-        <Project />
-        <Customer />
-      </div>
+      <About />
+      <Intro />
+      <Service />
+      <Project />
+      <Customer />
     </div>
   );
 }

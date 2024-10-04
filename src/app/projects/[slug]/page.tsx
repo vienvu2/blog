@@ -19,7 +19,7 @@ const ProjectDetail = ({ data }: { data: IProject }) => {
     <div className="project-detail">
       <div
         className="project-detail__header"
-        style={{ backgroundImage: `url(${data.imageLink})` }}
+        style={{ backgroundImage: `url("${data.imageLink}")` }}
       >
         <div className="project-detail__info">
           <h1>{data.title}</h1>
@@ -29,22 +29,23 @@ const ProjectDetail = ({ data }: { data: IProject }) => {
 
       <div className="container">
         <div className="project-detail__content">
-          <div className="project-detail__content__inner">
-            {(data.content || []).map((content) => {
-              if (content.type === "text") {
-                return <p key={content.value}>{content.value}</p>;
-              } else if (content.type === "image") {
-                return (
-                  <div
-                    key={content.value}
-                    className="project-detail__content__image"
-                  >
-                    <img src={content.value} alt="image" />
-                  </div>
-                );
-              }
-            })}
-          </div>
+          {(data.content || []).map((content) => {
+            if (content.type === "text") {
+              return <p key={content.value}>{content.value}</p>;
+            } else if (content.type === "image") {
+              return (
+                <div
+                  key={content.value}
+                  className="project-detail__content__image"
+                  style={{ marginBottom: 12, textAlign: "center" }}
+                >
+                  <img src={content.value} alt="image" />
+
+                  <p>{content.caption}</p>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@ export type IProject = {
     description: string;
     value: string;
     image?: any;
+    caption?: string;
   }[];
   domain: string;
 };
@@ -317,6 +318,23 @@ export default function CreateProject() {
                       ],
                     });
                   }}
+                />
+                <input
+                  type="text"
+                  value={item.caption}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      content: [
+                        ...data.content.slice(0, index),
+                        {
+                          ...data.content[index],
+                          caption: e.target.value,
+                        },
+                        ...data.content.slice(index + 1),
+                      ],
+                    })
+                  }
                 />
               </>
             )}

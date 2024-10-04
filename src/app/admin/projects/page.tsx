@@ -1,4 +1,6 @@
 "use client";
+import { uploadImage } from "@/app/actions";
+import UploadImage from "@/container/upload";
 // import UploadImage from "@/container/upload";
 import { db } from "@/firebase";
 import {
@@ -18,11 +20,19 @@ export type IProject = {
   slug: string;
   type: string;
   platform: string;
+  language: string;
   team: string;
   start: string;
   end: string;
   status: string;
-  image: string;
+  image: any;
+  imageLink: string;
+  content: {
+    type: "title" | "text" | "image";
+    description: string;
+    value: string;
+    image?: any;
+  }[];
 };
 
 export default function CreateProject() {
@@ -33,6 +43,7 @@ export default function CreateProject() {
     const projectsData = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
+      content: doc.data().content || [],
     }));
     console.log({ projectsData });
     setList(projectsData as IProject[]);
@@ -41,26 +52,43 @@ export default function CreateProject() {
     getData();
   }, []);
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<IProject>({
+    id: "",
     title: "",
     description: "",
     slug: "",
     type: "",
     platform: "",
     team: "",
+    language: "",
     start: "",
     end: "",
     status: "",
     image: "",
+    imageLink: "",
+    content: [],
   });
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      // upload image
+      if (data.image) {
+        data.imageLink = (await uploadImage(data.image, () => {})) as string;
+      }
+      for (let i = 0; i < data.content.length; i++) {
+        if (data.content[i].type == "image") {
+          data.content[i].value = (await uploadImage(
+            data.content[i].image,
+            () => {}
+          )) as string;
+        }
+      }
       await setDoc(doc(db, "projects", data.slug), {
         ...data,
       });
       setData({
+        id: "",
         title: "",
         description: "",
         slug: "",
@@ -68,9 +96,12 @@ export default function CreateProject() {
         platform: "",
         team: "",
         start: "",
+        language: "",
         end: "",
         status: "",
         image: "",
+        imageLink: "",
+        content: [],
       });
       getData();
     } catch (error) {
@@ -111,7 +142,9 @@ export default function CreateProject() {
               </td>
               <td>{project.type}</td>
               <td>{project.platform}</td>
-              <td>{project.image}</td>
+              <td>
+                <img src={project.imageLink} style={{ width: "100px" }} />
+              </td>
               <td>{project.slug}</td>
               <td>{project.start}</td>
               <td>{project.end}</td>
@@ -148,30 +181,49 @@ export default function CreateProject() {
           value={data.slug}
           onChange={(e) => setData({ ...data, slug: e.target.value })}
         />
-        <label htmlFor="title">Type</label>
-        <input
-          type="text"
-          value={data.type}
-          onChange={(e) => setData({ ...data, type: e.target.value })}
-        />
+
         <label htmlFor="title">Image</label>
         <input
-          type="text"
+          type="file"
           value={data.image}
           onChange={(e) => setData({ ...data, image: e.target.value })}
         />
+        <label htmlFor="title">Type</label>
+        <select
+          value={data.type}
+          onChange={(e) => setData({ ...data, type: e.target.value })}
+        >
+          <option value="web">Web</option>
+          <option value="mobile">Mobile</option>
+        </select>
+
         <label htmlFor="title">Platform</label>
-        <input
-          type="text"
-          value={data.platform}
-          onChange={(e) => setData({ ...data, platform: e.target.value })}
-        />
+
+        <select
+          value={data.type}
+          onChange={(e) => setData({ ...data, type: e.target.value })}
+        >
+          <option value="web">Web</option>
+          <option value="mobile">Mobile</option>
+        </select>
+
         <label htmlFor="title">Team</label>
         <input
           type="text"
           value={data.team}
           onChange={(e) => setData({ ...data, team: e.target.value })}
         />
+        <label htmlFor="title">Language</label>
+        <select
+          value={data.language}
+          onChange={(e) => setData({ ...data, language: e.target.value })}
+        >
+          <option value="react">React</option>
+          <option value="angular">Angular</option>
+          <option value="vue">Vue</option>
+          <option value="node">Node</option>
+          <option value="express">Express</option>
+        </select>
         <label htmlFor="title">Start</label>
         <input
           type="text"
@@ -191,15 +243,99 @@ export default function CreateProject() {
           onChange={(e) => setData({ ...data, status: e.target.value })}
         />
         <label htmlFor="description">Description</label>
-        <input
-          type="text"
+        <textarea
           id="description"
           value={data.description}
           onChange={(e) => setData({ ...data, description: e.target.value })}
         />
+        <div className="form">
+          <label> Content</label>
+          {data.content.map((item, index) => (
+            <div key={index}>
+              <select
+                value={item.type}
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    content: [
+                      ...data.content.slice(0, index),
+                      {
+                        ...data.content[index],
+                        type: e.target.value as "text" | "image",
+                      },
+                      ...data.content.slice(index + 1),
+                    ],
+                  })
+                }
+              >
+                <option value="text">Text</option>
+                <option value="image">Image</option>
+                <option value="title">Title</option>
+              </select>
+              {item.type == "image" && (
+                <input
+                  type="file"
+                  value={item.value}
+                  onChange={(e) => {
+                    console.log(e.target.files);
+                    setData({
+                      ...data,
+                      content: [
+                        ...data.content.slice(0, index),
+                        {
+                          ...data.content[index],
+                          image: e.target.value,
+                        },
+                        ...data.content.slice(index + 1),
+                      ],
+                    });
+                  }}
+                />
+              )}
+              {(item.type == "text" || item.type == "title") && (
+                <textarea
+                  value={item.description}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      content: [
+                        ...data.content.slice(0, index),
+                        {
+                          ...data.content[index],
+                          description: e.target.value,
+                        },
+                        ...data.content.slice(index + 1),
+                      ],
+                    })
+                  }
+                />
+              )}
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={() =>
+              setData({
+                ...data,
+                content: [
+                  ...data.content,
+                  {
+                    type: "text",
+                    description: "",
+                    value: "",
+                  },
+                ],
+              })
+            }
+          >
+            Add content
+          </button>
+        </div>
+
         <button type="submit">Submit</button>
       </form>
-      {/* <UploadImage /> */}
+      <UploadImage />
     </div>
   );
 }

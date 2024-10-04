@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { storage } from "@/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { uploadImage } from "@/app/actions";
 
 function UploadImage() {
   const [image, setImage] = useState<File | null>(null);
@@ -13,9 +14,8 @@ function UploadImage() {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!image) return;
-
     const storageRef = ref(storage, `images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
 

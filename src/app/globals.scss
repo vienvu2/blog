@@ -183,11 +183,15 @@ table {
 
 .form {
   width: 960px;
+  max-width: 100%;
   margin: 0 auto;
   border: 1px solid white;
   padding: 12px;
+  select,
+  textarea,
   input,
   button {
+    font-family: 'Noto Sans', sans-serif;
     padding: 0.5rem;
     border: none;
     display: block;
@@ -196,6 +200,7 @@ table {
     background: black;
     border: 1px solid white;
     border-radius: 5px;
+    font-size: 14px;
     color: white;
   }
   input {

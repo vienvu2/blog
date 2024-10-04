@@ -25,12 +25,15 @@ export type IProject = {
   status: string;
   image?: any;
   imageLink: string;
+  logo?: any;
+  logoLink: string;
   content: {
     type: "title" | "text" | "image";
     description: string;
     value: string;
     image?: any;
   }[];
+  domain: string;
 };
 
 export default function CreateProject() {
@@ -62,9 +65,12 @@ export default function CreateProject() {
     start: "",
     end: "",
     status: "",
+    domain: "",
     image: "",
     imageLink: "",
     content: [],
+    logo: "",
+    logoLink: "",
   });
 
   const onSubmit = async (e: any) => {
@@ -74,12 +80,16 @@ export default function CreateProject() {
       if (data.image) {
         data.imageLink = await uploadImage(data.image, () => {});
       }
+      if (data.logo) {
+        data.logoLink = await uploadImage(data.logo, () => {});
+      }
       for (let i = 0; i < data.content.length; i++) {
         if (data.content[i].type == "image" && data.content[i].image) {
           data.content[i].value = await uploadImage(data.content[i].image);
         }
         data.content[i].image = "";
       }
+      data.logo = "";
       data.image = "";
       await setDoc(doc(db, "projects", data.slug), {
         ...data,
@@ -91,6 +101,7 @@ export default function CreateProject() {
         slug: "",
         type: "",
         platform: "",
+        domain: "",
         team: "",
         start: "",
         language: "",
@@ -99,6 +110,8 @@ export default function CreateProject() {
         image: "",
         imageLink: "",
         content: [],
+        logo: "",
+        logoLink: "",
       });
       getData();
     } catch (error) {
@@ -122,6 +135,7 @@ export default function CreateProject() {
             <th>Type</th>
             <th>Platform</th>
             <th>Image</th>
+            <th>Logo</th>
             <th>Slug</th>
             <th>Start</th>
             <th>End</th>
@@ -182,34 +196,33 @@ export default function CreateProject() {
           value={data.slug}
           onChange={(e) => setData({ ...data, slug: e.target.value })}
         />
-
         <label htmlFor="title">Image</label>
+        <p>{data.imageLink}</p>
         <input
           type="file"
-          // value={data.image}
           onChange={(e) =>
             setData({ ...data, image: e.target.files && e.target.files[0] })
           }
         />
+        <label htmlFor="title">Logo</label>
+        <input
+          type="file"
+          onChange={(e) =>
+            setData({ ...data, logo: e.target.files && e.target.files[0] })
+          }
+        />
         <label htmlFor="title">Type</label>
-        <select
+        <input
+          type="text"
           value={data.type}
           onChange={(e) => setData({ ...data, type: e.target.value })}
-        >
-          <option value="web">Web</option>
-          <option value="mobile">Mobile</option>
-        </select>
-
+        />
         <label htmlFor="title">Platform</label>
-
-        <select
-          value={data.type}
-          onChange={(e) => setData({ ...data, type: e.target.value })}
-        >
-          <option value="web">Web</option>
-          <option value="mobile">Mobile</option>
-        </select>
-
+        <input
+          type="text"
+          value={data.platform}
+          onChange={(e) => setData({ ...data, platform: e.target.value })}
+        />
         <label htmlFor="title">Team</label>
         <input
           type="text"
@@ -217,16 +230,17 @@ export default function CreateProject() {
           onChange={(e) => setData({ ...data, team: e.target.value })}
         />
         <label htmlFor="title">Language</label>
-        <select
+        <input
+          type="text"
           value={data.language}
           onChange={(e) => setData({ ...data, language: e.target.value })}
-        >
-          <option value="react">React</option>
-          <option value="angular">Angular</option>
-          <option value="vue">Vue</option>
-          <option value="node">Node</option>
-          <option value="express">Express</option>
-        </select>
+        />
+        <label htmlFor="title">Domain</label>
+        <input
+          type="text"
+          value={data.domain}
+          onChange={(e) => setData({ ...data, domain: e.target.value })}
+        />
         <label htmlFor="title">Start</label>
         <input
           type="text"
@@ -276,24 +290,27 @@ export default function CreateProject() {
                 <option value="title">Title</option>
               </select>
               {item.type == "image" && (
-                <input
-                  type="file"
-                  // value={item.value}
-                  onChange={(e) => {
-                    console.log(e.target.files);
-                    setData({
-                      ...data,
-                      content: [
-                        ...data.content.slice(0, index),
-                        {
-                          ...data.content[index],
-                          image: e.target.files && e.target.files[0],
-                        },
-                        ...data.content.slice(index + 1),
-                      ],
-                    });
-                  }}
-                />
+                <>
+                  <p>{item.value}</p>
+                  <input
+                    type="file"
+                    // value={item.value}
+                    onChange={(e) => {
+                      console.log(e.target.files);
+                      setData({
+                        ...data,
+                        content: [
+                          ...data.content.slice(0, index),
+                          {
+                            ...data.content[index],
+                            image: e.target.files && e.target.files[0],
+                          },
+                          ...data.content.slice(index + 1),
+                        ],
+                      });
+                    }}
+                  />
+                </>
               )}
               {(item.type == "text" || item.type == "title") && (
                 <textarea
@@ -335,7 +352,6 @@ export default function CreateProject() {
             Add content
           </button>
         </div>
-
         <button type="submit">Submit</button>
       </form>
       {/* <UploadImage /> */}

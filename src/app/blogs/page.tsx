@@ -5,9 +5,10 @@ export default function Home() {
   return (
     <div className="main">
       <Header pathname="/blogs" />
-      <div className="page">
-        <BlogList />
+      <div className="blog-header">
+        <h1>Blog</h1>
       </div>
+      <BlogList />
     </div>
   );
 }

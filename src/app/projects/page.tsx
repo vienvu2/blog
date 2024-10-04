@@ -2,8 +2,6 @@ import Header from "@/container/header";
 import ProjectList from "@/container/project-list";
 
 export default function Home(props: any) {
-  console.log(props.searchParams);
-
   return (
     <div className="main">
       <Header pathname="/projects" />

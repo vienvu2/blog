@@ -1,6 +1,7 @@
+import { IProject } from "@/app/admin/projects/page";
 import Header from "@/container/header";
 import { db } from "@/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 export default async function Home() {
   const data = await getData();
@@ -18,14 +19,12 @@ const ProjectDetail = ({ data }: { data: any }) => {
   return (
     <div>
       <h1>{data.title}</h1>
-      <p>Project detail content</p>
+      {JSON.stringify(data)}
     </div>
   );
 };
 
 const getData = async () => {
-  const ref = collection(db, "projects");
-  const docRef = doc(ref, "calo");
-  const res = await getDoc(docRef);
-  return res.data();
+  const docSnap = await getDoc(doc(db, "projects", "checkjay"));
+  return docSnap.data() as IProject;
 };

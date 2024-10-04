@@ -4,10 +4,10 @@ import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 
 export default async function ProjectList() {
-  const projectsData = await getData();
+  const projects = await getData();
   return (
     <div className="project-list">
-      {projectsData.map((a) => (
+      {projects.map((a) => (
         <div key={a.title} className="project-item">
           <Link href={"/projects/" + a.slug}>{a.title}</Link>
           <Link href={"/projects/" + a.slug}>
@@ -21,6 +21,6 @@ export default async function ProjectList() {
 
 const getData = async () => {
   const querySnapshot = await getDocs(collection(db, "projects"));
-  const projectsData = querySnapshot.docs.map((doc) => doc.data());
-  return projectsData as IProject[];
+  const projects = querySnapshot.docs.map((doc) => doc.data());
+  return projects as IProject[];
 };

@@ -21,6 +21,61 @@ a {
     text-decoration: none;
   }
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -12px;
+  margin-left: -12px;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / 12);
+    max-width: percentage($i / 12);
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .col-sm {
+    position: relative;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .col-md {
+    position: relative;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+  }
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -66,9 +121,6 @@ a {
   }
 }
 
-.main {
-}
-
 .footer {
   padding: 1rem;
   display: flex;
@@ -111,10 +163,7 @@ a {
   }
 }
 .service {
-  display: flex;
-  align-items: center;
   padding: 40px 0 60px 0;
-
   width: 960px;
   margin: 0 auto;
   &__item {
@@ -122,6 +171,11 @@ a {
     flex: 1;
     padding: 12px;
     padding-top: 100px;
+  }
+  &__title {
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-weight: bold;
   }
 }
 
@@ -136,13 +190,7 @@ a {
     font-weight: bold;
   }
 
-  &__row {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
   &__item {
-    flex: 1;
     padding: 20px;
     border: 1px solid #fff4;
     h4 {
@@ -162,6 +210,11 @@ a {
 .project {
   width: 960px;
   margin: 0 auto;
+  &__title {
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
 }
 
 table {
@@ -228,9 +281,7 @@ button {
 }
 
 .project-item {
-  display: flex;
   align-items: center;
-  gap: 1rem;
   padding: 1rem;
   border: 1px solid #fff4;
   margin-bottom: 1rem;
@@ -252,4 +303,7 @@ input {
   border-radius: 5px;
   background: #223442;
   color: white;
+}
+
+.project-list {
 }

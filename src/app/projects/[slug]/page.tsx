@@ -28,7 +28,10 @@ const ProjectDetail = ({ data }: { data: IProject }) => {
       </div>
 
       <div className="container">
-        <div className="project-detail__content">
+        <div
+          className="project-detail__content"
+          style={{ paddingBottom: "60px 0 40px 0" }}
+        >
           {(data.content || []).map((content) => {
             if (content.type === "text") {
               return <p key={content.value}>{content.value}</p>;

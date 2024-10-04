@@ -334,13 +334,16 @@ button {
   align-items: center;
   padding: 1rem;
   border: 1px solid #fff4;
+  &:hover {
+    background: #fff4;
+  }
   margin-bottom: 1rem;
   display: flex;
   &__image {
     margin-right: 1rem;
   }
   img {
-    width: 120px;
+    width: 80px;
     height: 120px;
     border-radius: 5px;
     object-fit: cover;
@@ -348,6 +351,9 @@ button {
   h4 {
     font-size: 24px;
     font-weight: bold;
+  }
+  a {
+    flex: 1;
   }
 }
 select,

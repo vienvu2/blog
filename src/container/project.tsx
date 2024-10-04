@@ -12,13 +12,7 @@ export default async function Project() {
         <div className="row">
           {projects.map((project) => (
             <div className="col-md-6" key={project.id}>
-              <div className="project-item" key={project.id}>
-                <img src={project.imageLink} alt="project" />
-                <Link href={"/projects/" + project.slug}>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                </Link>
-              </div>
+              <ProjectItem project={project} />
             </div>
           ))}
         </div>
@@ -26,6 +20,20 @@ export default async function Project() {
     </div>
   );
 }
+
+export const ProjectItem = ({ project }: { project: IProject }) => {
+  return (
+    <div className="project-item" key={project.id}>
+      <div className="project-item__image">
+        <img src={project.imageLink} alt="project" />
+      </div>
+      <Link href={"/projects/" + project.slug}>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+      </Link>
+    </div>
+  );
+};
 
 const getData = async () => {
   const res = await getDocs(query(collection(db, "projects"), limit(6)));

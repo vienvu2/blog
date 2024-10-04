@@ -17,7 +17,7 @@ export default function About() {
           </p>
         </div>
         <div className="about__image">
-          <img src="/images/me.jpg" alt="Viên Vũ" />
+          <img src="/images/me.png" alt="Viên Vũ" />
         </div>
       </div>
     </div>

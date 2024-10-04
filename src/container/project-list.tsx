@@ -1,20 +1,19 @@
 import { IProject } from "@/app/admin/projects/page";
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import Link from "next/link";
+import { ProjectItem } from "./project";
 
 export default async function ProjectList() {
   const projects = await getData();
   return (
     <div className="project-list">
-      {projects.map((a) => (
-        <div key={a.title} className="project-item">
-          <Link href={"/projects/" + a.slug}>{a.title}</Link>
-          <Link href={"/projects/" + a.slug}>
-            <img src={a.imageLink} alt={a.title} />
-          </Link>
-        </div>
-      ))}
+      <div className="row">
+        {projects.map((project) => (
+          <div className="col-md-6" key={project.id}>
+            <ProjectItem project={project} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

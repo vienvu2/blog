@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Intro() {
   return (
     <div className="intro">
-      <div className="intro__title">I{"'"}m a Full Stack Developer</div>
+      {/* <div className="intro__title">I{"'"}m a Full Stack Developer</div> */}
       <div className="row">
         <div className="col-md-4">
           <div className="intro__item">

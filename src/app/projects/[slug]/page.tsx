@@ -8,18 +8,21 @@ export default async function Home() {
   return (
     <div className="main">
       <Header pathname="/projects" />
-      <div className="project-detail">
-        <ProjectDetail data={data} />
-      </div>
+      <ProjectDetail data={data} />
     </div>
   );
 }
 
-const ProjectDetail = ({ data }: { data: any }) => {
+const ProjectDetail = ({ data }: { data: IProject }) => {
   return (
-    <div>
-      <h1>{data.title}</h1>
-      {JSON.stringify(data)}
+    <div className="project-detail">
+      <div
+        className="project-detail__header"
+        style={{ background: `#0001 url(${data.imageLink}) ` }}
+      >
+        <h1>{data.title}</h1>
+        <p>{data.description}</p>
+      </div>
     </div>
   );
 };

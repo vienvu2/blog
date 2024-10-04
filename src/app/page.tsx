@@ -6,6 +6,7 @@ import Service from "@/container/service";
 import Project from "@/container/project";
 import Customer from "@/container/customer";
 import Header from "@/container/header";
+import Blog from "@/container/blog";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Intro />
       <Service />
       <Project />
+      <Blog />
       <Customer />
     </div>
   );

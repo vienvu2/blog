@@ -1,5 +1,4 @@
 "use client";
-import UploadImage from "@/container/upload";
 import { db } from "@/firebase";
 import {
   collection,
@@ -110,7 +109,7 @@ export default function CreateProject() {
       </table>
       <h4>Thêm mới</h4>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="form">
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -159,7 +158,6 @@ export default function CreateProject() {
           onChange={(e) => setData({ ...data, content: e.target.value })}
         />
 
-        <UploadImage />
         <button type="submit">Submit</button>
       </form>
     </div>

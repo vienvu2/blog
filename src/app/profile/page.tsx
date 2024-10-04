@@ -6,7 +6,6 @@ export default function Home() {
     <div className="main">
       <Header pathname="/" />
       <About />
-      {/* <h1>Profile</h1> */}
     </div>
   );
 }

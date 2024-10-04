@@ -11,7 +11,7 @@ export default async function Project() {
       <div className="project-list">
         <div className="row">
           {projects.map((project) => (
-            <div className="col-md-6" key={project.id}>
+            <div className="col-md-4" key={project.id}>
               <ProjectItem project={project} />
             </div>
           ))}

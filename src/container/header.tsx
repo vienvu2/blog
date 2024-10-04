@@ -16,7 +16,7 @@ export default function Header({ pathname }: { pathname: string }) {
           </Link>
         </div>
         <div className="header__name">
-          <Link href="/">VienVu@developer.web.mobile</Link>
+          <Link href="/">Vien_Vu</Link>
         </div>
 
         <div className="menu">

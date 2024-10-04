@@ -19,6 +19,8 @@ export type IBlog = {
   date: string;
   image?: any;
   imageLink: string;
+
+  content: string;
 };
 
 export default function CreateProject() {
@@ -42,6 +44,7 @@ export default function CreateProject() {
     image: "",
     imageLink: "",
     id: "",
+    content: "",
   });
 
   const onSubmit = async () => {
@@ -58,6 +61,7 @@ export default function CreateProject() {
         image: "",
         imageLink: "",
         id: "",
+        content: "",
       });
       getData();
     } catch (error) {
@@ -146,6 +150,15 @@ export default function CreateProject() {
           value={data.description}
           onChange={(e) => setData({ ...data, description: e.target.value })}
         />
+
+        <label htmlFor="description">content</label>
+        <input
+          type="text"
+          id="description"
+          value={data.content}
+          onChange={(e) => setData({ ...data, content: e.target.value })}
+        />
+
         <UploadImage />
         <button type="submit">Submit</button>
       </form>

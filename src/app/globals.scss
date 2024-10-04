@@ -27,6 +27,12 @@ a {
   }
 }
 
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -102,6 +108,7 @@ a {
     a {
       color: #fff4;
       padding: 12px;
+      font-size: 14px;
       border-bottom: 1px solid transparent;
       &.active,
       &:hover {
@@ -182,13 +189,15 @@ a {
     background: #fff4;
   }
   &__item {
-    // border: 1px solid #fff4;
-    flex: 1;
+    min-height: 300px;
     padding: 12px;
     img {
       height: 100px;
+      display: block;
+      margin-bottom: 24px;
     }
     h4 {
+      margin-bottom: 12px;
       font-size: 18px;
     }
     &:hover {
@@ -331,9 +340,10 @@ button {
     margin-right: 1rem;
   }
   img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 5px;
+    object-fit: cover;
   }
   h4 {
     font-size: 24px;
@@ -356,11 +366,31 @@ input {
 .project-detail {
   &__header {
     align-items: center;
-    padding: 300px 0 20px 0;
+    padding: 200px 0 100px 0;
     background-size: cover;
+    background-color: #0004;
+    background-position: center;
+    background-blend-mode: soft-light;
     h1 {
       font-size: 36px;
       font-weight: bold;
     }
   }
+  &__info {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+.project-header {
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

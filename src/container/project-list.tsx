@@ -9,7 +9,7 @@ export default async function ProjectList() {
     <div className="project-list">
       <div className="row">
         {projects.map((project) => (
-          <div className="col-md-6" key={project.id}>
+          <div className="col-md-3" key={project.id}>
             <ProjectItem project={project} />
           </div>
         ))}

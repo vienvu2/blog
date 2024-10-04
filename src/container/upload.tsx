@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { storage } from "@/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { uploadImage } from "@/app/actions";
 
 function UploadImage() {
   const [image, setImage] = useState<File | null>(null);

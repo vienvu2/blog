@@ -1,9 +1,9 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-export const uploadImage = (image: File, setProgress: Function) => {
+export const uploadImage = (image: File, setProgress?: (progress: number) => void): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const storageRef = ref(storage, `images/${image.name}`);
+    const storageRef = ref(storage, `images/${image.name || Math.random()}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
 
     uploadTask.on(
@@ -11,7 +11,9 @@ export const uploadImage = (image: File, setProgress: Function) => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(progress);
+        if (setProgress) {
+          setProgress(progress);
+        }
       },
       (error) => {
         console.error("Upload failed:", error);

@@ -1,7 +1,5 @@
 "use client";
 import { uploadImage } from "@/app/actions";
-import UploadImage from "@/container/upload";
-// import UploadImage from "@/container/upload";
 import { db } from "@/firebase";
 import {
   collection,
@@ -25,7 +23,7 @@ export type IProject = {
   start: string;
   end: string;
   status: string;
-  image: any;
+  image?: any;
   imageLink: string;
   content: {
     type: "title" | "text" | "image";
@@ -74,16 +72,15 @@ export default function CreateProject() {
     try {
       // upload image
       if (data.image) {
-        data.imageLink = (await uploadImage(data.image, () => {})) as string;
+        data.imageLink = await uploadImage(data.image, () => {});
       }
       for (let i = 0; i < data.content.length; i++) {
-        if (data.content[i].type == "image") {
-          data.content[i].value = (await uploadImage(
-            data.content[i].image,
-            () => {}
-          )) as string;
+        if (data.content[i].type == "image" && data.content[i].image) {
+          data.content[i].value = await uploadImage(data.content[i].image);
         }
+        data.content[i].image = "";
       }
+      data.image = "";
       await setDoc(doc(db, "projects", data.slug), {
         ...data,
       });
@@ -152,7 +149,11 @@ export default function CreateProject() {
               <td>{project.team}</td>
               <td>{project.description}</td>
               <th>
-                <button onClick={() => setData(project)}>Edit</button>
+                <button
+                  onClick={() => setData({ ...project, image: undefined })}
+                >
+                  Edit
+                </button>
                 <button onClick={() => remove(project)}>Delete</button>
               </th>
             </tr>
@@ -185,8 +186,10 @@ export default function CreateProject() {
         <label htmlFor="title">Image</label>
         <input
           type="file"
-          value={data.image}
-          onChange={(e) => setData({ ...data, image: e.target.value })}
+          // value={data.image}
+          onChange={(e) =>
+            setData({ ...data, image: e.target.files && e.target.files[0] })
+          }
         />
         <label htmlFor="title">Type</label>
         <select
@@ -275,7 +278,7 @@ export default function CreateProject() {
               {item.type == "image" && (
                 <input
                   type="file"
-                  value={item.value}
+                  // value={item.value}
                   onChange={(e) => {
                     console.log(e.target.files);
                     setData({
@@ -284,7 +287,7 @@ export default function CreateProject() {
                         ...data.content.slice(0, index),
                         {
                           ...data.content[index],
-                          image: e.target.value,
+                          image: e.target.files && e.target.files[0],
                         },
                         ...data.content.slice(index + 1),
                       ],
@@ -335,7 +338,7 @@ export default function CreateProject() {
 
         <button type="submit">Submit</button>
       </form>
-      <UploadImage />
+      {/* <UploadImage /> */}
     </div>
   );
 }

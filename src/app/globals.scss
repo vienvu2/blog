@@ -191,7 +191,7 @@ table {
   textarea,
   input,
   button {
-    font-family: 'Noto Sans', sans-serif;
+    font-family: "Noto Sans", sans-serif;
     padding: 0.5rem;
     border: none;
     display: block;
@@ -225,4 +225,31 @@ button {
   &:hover {
     background: #1a2733;
   }
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #fff4;
+  margin-bottom: 1rem;
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+  }
+  h4 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+select,
+input {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 5px;
+  background: #223442;
+  color: white;
 }

@@ -4,13 +4,9 @@ import "./globals.scss";
 export const metadata: Metadata = {
   title: "ViênVũ's Portfolio",
   description: "ViênVũ's Portfolio website and blog",
-  icons: [
-    {
-      rel: "favicon",
-      href: "/favicon.ico",
-      url: "/images/me.png",
-    },
-  ],
+  icons: {
+    icon: "/images/me.png",
+  },
 };
 
 export default function RootLayout({

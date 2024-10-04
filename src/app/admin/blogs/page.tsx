@@ -1,15 +1,24 @@
 "use client";
 import UploadImage from "@/container/upload";
 import { db } from "@/firebase";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type IBlog = {
+export type IBlog = {
   id: string;
   title: string;
   description: string;
   slug: string;
+  date: string;
+  image?: any;
+  imageLink: string;
 };
 
 export default function CreateProject() {
@@ -25,10 +34,14 @@ export default function CreateProject() {
     getData();
   }, []);
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<IBlog>({
     title: "",
     description: "",
     slug: "",
+    date: "",
+    image: "",
+    imageLink: "",
+    id: "",
   });
 
   const onSubmit = async () => {
@@ -41,6 +54,10 @@ export default function CreateProject() {
         title: "",
         description: "",
         slug: "",
+        date: "",
+        image: "",
+        imageLink: "",
+        id: "",
       });
       getData();
     } catch (error) {
@@ -62,7 +79,27 @@ export default function CreateProject() {
               <td>
                 <Link href="/">{project.title}</Link>
               </td>
-              <th></th>
+              <th>
+                <button
+                  onClick={async () => {
+                    await setDoc(doc(db, "blogs", project.id), {
+                      title: project.title,
+                      description: project.description,
+                    });
+                    getData();
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={async () => {
+                    await deleteDoc(doc(db, "blogs", project.id));
+                    getData();
+                  }}
+                >
+                  Delete
+                </button>
+              </th>
             </tr>
           ))}
         </tbody>
@@ -88,6 +125,20 @@ export default function CreateProject() {
           value={data.slug}
           onChange={(e) => setData({ ...data, slug: e.target.value })}
         />
+        <label>Date</label>
+        <input
+          type="date"
+          value={data.date}
+          onChange={(e) => setData({ ...data, date: e.target.value })}
+        />
+        <label htmlFor="description">Image</label>
+        <input
+          type="file"
+          onChange={(e) =>
+            setData({ ...data, image: e.target.files && e.target.files[0] })
+          }
+        />
+
         <label htmlFor="description">Description</label>
         <input
           type="text"

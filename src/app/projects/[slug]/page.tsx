@@ -32,6 +32,17 @@ const ProjectDetail = ({ data }: { data: IProject }) => {
           className="project-detail__content"
           style={{ paddingBottom: "60px 0 40px 0" }}
         >
+          <h2>Main information</h2>
+          <p>
+            Time: {data.start} - {data.end}
+          </p>
+          {/* <p>Location: {data.location}</p>
+          <p>Client: {data.client}</p>
+          <p>Category: {data.category}</p>
+          <p>Service: {data.service}</p> */}
+
+          <h2>Content</h2>
+
           {(data.content || []).map((content) => {
             if (content.type === "text") {
               return <p key={content.value}>{content.value}</p>;

@@ -95,7 +95,7 @@ a {
   z-index: 100;
   padding: 0 12px;
   border-bottom: 1px solid #fff4;
-  background: #223442;
+  background: #1a242c;
   .social {
     width: 30%;
   }
@@ -119,13 +119,15 @@ a {
   }
   &__inner {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     max-width: 1320px;
     margin: 0 auto;
     justify-content: space-between;
   }
   &__name {
     font-size: 16px;
+    padding-bottom: 50px;
+    padding-top: 50px;
     color: #fff;
     font-weight: bold;
     flex: 1;

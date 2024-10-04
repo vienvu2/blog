@@ -1,7 +1,7 @@
 import Header from "@/container/header";
 import ProjectList from "@/container/project-list";
 
-export default function Home(props: any) {
+export default function Home() {
   return (
     <div className="main">
       <Header pathname="/projects" />

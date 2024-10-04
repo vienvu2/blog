@@ -156,6 +156,9 @@ export default function CreateProject() {
               <td>
                 <img src={project.imageLink} style={{ width: "100px" }} />
               </td>
+              <td>
+                <img src={project.logoLink} style={{ width: "100px" }} />
+              </td>
               <td>{project.slug}</td>
               <td>{project.start}</td>
               <td>{project.end}</td>
@@ -265,12 +268,61 @@ export default function CreateProject() {
           value={data.description}
           onChange={(e) => setData({ ...data, description: e.target.value })}
         />
-        <div className="form">
-          <label> Content</label>
-          {data.content.map((item, index) => (
-            <div key={index}>
-              <select
-                value={item.type}
+        {data.content.map((item, index) => (
+          <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            <select
+              value={item.type}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  content: [
+                    ...data.content.slice(0, index),
+                    {
+                      ...data.content[index],
+                      type: e.target.value as "text" | "image",
+                    },
+                    ...data.content.slice(index + 1),
+                  ],
+                })
+              }
+            >
+              <option value="text">Text</option>
+              <option value="image">Image</option>
+              <option value="title">Title</option>
+            </select>
+            {item.type == "image" && (
+              <>
+                <p>{item.value}</p>
+                <input
+                  type="file"
+                  // value={item.value}
+                  onChange={(e) => {
+                    console.log(e.target.files);
+                    setData({
+                      ...data,
+                      content: [
+                        ...data.content.slice(0, index),
+                        {
+                          ...data.content[index],
+                          image: e.target.files && e.target.files[0],
+                        },
+                        ...data.content.slice(index + 1),
+                      ],
+                    });
+                  }}
+                />
+              </>
+            )}
+            {(item.type == "text" || item.type == "title") && (
+              <textarea
+                value={item.description}
                 onChange={(e) =>
                   setData({
                     ...data,
@@ -278,80 +330,35 @@ export default function CreateProject() {
                       ...data.content.slice(0, index),
                       {
                         ...data.content[index],
-                        type: e.target.value as "text" | "image",
+                        description: e.target.value,
                       },
                       ...data.content.slice(index + 1),
                     ],
                   })
                 }
-              >
-                <option value="text">Text</option>
-                <option value="image">Image</option>
-                <option value="title">Title</option>
-              </select>
-              {item.type == "image" && (
-                <>
-                  <p>{item.value}</p>
-                  <input
-                    type="file"
-                    // value={item.value}
-                    onChange={(e) => {
-                      console.log(e.target.files);
-                      setData({
-                        ...data,
-                        content: [
-                          ...data.content.slice(0, index),
-                          {
-                            ...data.content[index],
-                            image: e.target.files && e.target.files[0],
-                          },
-                          ...data.content.slice(index + 1),
-                        ],
-                      });
-                    }}
-                  />
-                </>
-              )}
-              {(item.type == "text" || item.type == "title") && (
-                <textarea
-                  value={item.description}
-                  onChange={(e) =>
-                    setData({
-                      ...data,
-                      content: [
-                        ...data.content.slice(0, index),
-                        {
-                          ...data.content[index],
-                          description: e.target.value,
-                        },
-                        ...data.content.slice(index + 1),
-                      ],
-                    })
-                  }
-                />
-              )}
-            </div>
-          ))}
+              />
+            )}
+          </div>
+        ))}
 
-          <button
-            type="button"
-            onClick={() =>
-              setData({
-                ...data,
-                content: [
-                  ...data.content,
-                  {
-                    type: "text",
-                    description: "",
-                    value: "",
-                  },
-                ],
-              })
-            }
-          >
-            Add content
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() =>
+            setData({
+              ...data,
+              content: [
+                ...data.content,
+                {
+                  type: "text",
+                  description: "",
+                  value: "",
+                },
+              ],
+            })
+          }
+        >
+          Add content
+        </button>
         <button type="submit">Submit</button>
       </form>
       {/* <UploadImage /> */}

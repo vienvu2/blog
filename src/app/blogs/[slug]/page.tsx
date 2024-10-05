@@ -1,5 +1,4 @@
 import { IBlog } from "@/app/admin/blogs/page";
-import BlogList from "@/container/blog-list";
 import Header from "@/container/header";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";

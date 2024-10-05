@@ -9,7 +9,6 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export type IBlog = {

@@ -7,7 +7,7 @@ export default function Intro() {
       <div className="row">
         <div className="col-md-4">
           <div className="intro__item">
-            <h4> 50+ </h4>
+            <h4> 20+ </h4>
             <p> Projects</p>
             <Link href="/projects">Check it out</Link>
           </div>
@@ -21,7 +21,7 @@ export default function Intro() {
         </div>
         <div className="col-md-4">
           <div className="intro__item">
-            <h4>100+ </h4>
+            <h4>10+ </h4>
             <p>Blogs</p>
             <Link href="/blogs">Read them</Link>
           </div>

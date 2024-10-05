@@ -1,6 +1,7 @@
 import { IBlog } from "@/app/admin/blogs/page";
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import Link from "next/link";
 
 export default async function Blog() {
   const blogs = await getData();
@@ -21,13 +22,15 @@ export default async function Blog() {
 }
 export const BlogItem = ({ blog }: { blog: IBlog }) => {
   return (
-    <div className="blog-item" key={blog.id}>
-      <div className="blog-item__image">
-        <img src={blog.imageLink} alt="blog" />
+    <Link href={`/blogs/${blog.slug}`}>
+      <div className="blog-item" key={blog.id}>
+        <div className="blog-item__image">
+          <img src={blog.imageLink} alt="blog" />
+        </div>
+        <h3>{blog.title}</h3>
+        <p>{blog.description}</p>
       </div>
-      <h3>{blog.title}</h3>
-      <p>{blog.description}</p>
-    </div>
+    </Link>
   );
 };
 

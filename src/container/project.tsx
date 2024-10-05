@@ -30,8 +30,6 @@ export const ProjectItem = ({ project }: { project: IProject }) => {
       <Link href={"/projects/" + project.slug}>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
-
-       
       </Link>
     </div>
   );

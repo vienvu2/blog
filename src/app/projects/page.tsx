@@ -8,7 +8,7 @@ export default function Home() {
       <div className="page">
         <div className="project-header">
           <input placeholder="Search project" />
-          <div className="project-filter">
+          {/* <div className="project-filter">
             <select>
               <option>Template</option>
               <option>Demo</option>
@@ -21,7 +21,7 @@ export default function Home() {
               <option>Web (+40)</option>
               <option>Landingpage (+10)</option>
             </select>
-          </div>
+          </div> */}
         </div>
         <ProjectList />
       </div>

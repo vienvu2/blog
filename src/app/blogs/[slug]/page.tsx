@@ -10,10 +10,14 @@ export default async function Home({ params }: any) {
       <Header pathname="/blogs" />
       <div className="page">
         <div className="container">
-          <h1>{blog.title}</h1>
-          <img src={blog.imageLink} alt="blog" />
-          <p>{blog.description}</p>
-          <p>{blog.content}</p>
+          <div className="blog-header">
+            <h1>{blog.title}</h1>
+            <p>{blog.description}</p>
+            <img src={blog.imageLink} alt="blog" />
+          </div>
+          <div className="blog-content">
+            <p>{blog.content}</p>
+          </div>
         </div>
       </div>
     </div>

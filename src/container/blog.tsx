@@ -7,7 +7,7 @@ export default async function Blog() {
   const blogs = await getData();
   return (
     <div className="blog">
-      <h3 className="blog__title">TOP BLOG</h3>
+      <h3 className="blog__title">My blogs</h3>
       <div className="blog-list">
         <div className="row">
           {blogs.map((blog) => (

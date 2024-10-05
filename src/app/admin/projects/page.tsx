@@ -39,6 +39,7 @@ export type IProject = {
 
 export default function CreateProject() {
   const [list, setList] = useState<IProject[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "projects"));
@@ -76,6 +77,7 @@ export default function CreateProject() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     try {
       // upload image
       if (data.image) {
@@ -118,6 +120,7 @@ export default function CreateProject() {
     } catch (error) {
       console.error("Error adding document: ", error);
     }
+    setLoading(false);
   };
   const remove = async (e: IProject) => {
     try {
@@ -129,6 +132,25 @@ export default function CreateProject() {
   };
   return (
     <div>
+      {loading && (
+        <div
+          className="loading"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(255, 255, 255, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "24px",
+          }}
+        >
+          Loading...
+        </div>
+      )}
       <table>
         <thead>
           <tr>

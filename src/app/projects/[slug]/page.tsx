@@ -35,11 +35,14 @@ const ProjectDetail = ({ data }: { data: IProject }) => {
           <h2>Main information</h2>
           <p>
             Time: {data.start} - {data.end}
+            <br />
             Platform: {data.platform}
+            <br />
             Type: {data.type}
+            <br />
             Member: {data.team}
+            <br />
             Language: {data.language}
-
           </p>
           {/* <p>Location: {data.location}</p>
           <p>Client: {data.client}</p>

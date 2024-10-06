@@ -24,9 +24,11 @@ export default async function Project() {
 export const ProjectItem = ({ project }: { project: IProject }) => {
   return (
     <div className="project-item" key={project.id}>
-      <div className="project-item__image">
-        <img src={project.imageLink} alt="project" />
-      </div>
+      <Link href={"/projects/" + project.slug}>
+        <div className="project-item__image">
+          <img src={project.imageLink} alt="project" />
+        </div>
+      </Link>
       <Link href={"/projects/" + project.slug}>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
